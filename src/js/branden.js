@@ -6,7 +6,16 @@ import {
     newCar
 } from "/src/js/app.js";
 
+import {
+    updateDashBoard
+} from "/src/js/app.js"
 
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+document.body.addEventListener('keydown', logKey);
 
 let pimpEnabled = false;
 function logKey(e) {
@@ -18,15 +27,20 @@ function logKey(e) {
 }
 
 
-function pimpMyRide() {
+async function pimpMyRide() {
     new Audio("https://bigsoundbank.com/UPLOAD/mp3/0600.mp3").play();
     while(newCar.speed < 1000) {
-        newCar.speed += 10;
+        newCar.accelerate()
+        updateDashBoard(newCar);
+        await sleep(50);
 
     }
 
+    
     new Audio("/src/car-crash-sound-eefect.mp3").play();
-    newCar.speed = -1;
+    await sleep(50);
+    newCar.stop();
+    updateDashBoard(newCar);
 
 
 }

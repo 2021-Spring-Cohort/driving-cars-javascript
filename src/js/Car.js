@@ -10,6 +10,10 @@ class Car {
         this.checkForEngineDamage();
     }
 
+    stop() {
+        this._speed = 0;
+    }
+
     brake(){
         this._speed -= 10;
         if(this._speed<0){
