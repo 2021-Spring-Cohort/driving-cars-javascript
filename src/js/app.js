@@ -57,3 +57,4 @@ function updateCheckEngineLight(car) {
         checkEngineLight.classList.toggle('hidden');
     }
 }
+export { newCar }
