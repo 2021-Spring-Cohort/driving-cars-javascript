@@ -4,7 +4,7 @@ const body = document.querySelector("body");
 
 let pimpEnabled = false;
 function logKey(e) {
-    if(e.code == "KeyP" && !pimpEnabled){
+    if(e.code == "KeyD" && !pimpEnabled){
         console.log(e.code);
         pimpEnabled = true;
         pimpMyRide();
