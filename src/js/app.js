@@ -1,9 +1,9 @@
 import {
     Car
 } from "/src/js/Car.js";
-
+const body = document.querySelector("body");
 const newCar = new Car();
-
+const warnEvent = new Event('warnEvent');
 const updateDashBoard = function (car) {
     const speedometer = document.querySelector(".dashboard__speedometer");
     speedometer.innerText = car.speed;
@@ -46,14 +46,22 @@ function updateOilPressureLight(car) {
         oilPressure.classList.toggle('hidden');
         const accelerator = document.querySelector('.floorboard__accelerator');
         accelerator.disabled = true;
-
+        body.dispatchEvent(warnEvent);
     }
 }
 
+let checkEngineLightOn = false;
 function updateCheckEngineLight(car) {
     const checkEngineLight = document.querySelector(".dashboard__check-engine-light");
     checkEngineLight.classList.add('hidden');
-    if (car.engineHealth < 80) {
+    if (car.engineHealth < 80 && !checkEngineLightOn) {
+        checkEngineLight.classList.toggle('hidden');
+        body.dispatchEvent(warnEvent);
+        checkEngineLightOn = true;
+    }
+    else if(car.engineHealth < 80){
         checkEngineLight.classList.toggle('hidden');
     }
 }
+document.body.addEventListener('keydown', logKey);
+
